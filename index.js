@@ -24,7 +24,7 @@ app.post("/convert", (req, res) => {
   }
   const file = req.files.file;
   console.log(file);
-  const fileDestinationUrl = "client/public/temp";
+  const fileDestinationUrl = "../kdp-app-client/public/temp";
   let clientPath = path.join(__dirname, fileDestinationUrl);
   // Checks if user image folder exists, if not creates one
   if (!fs.existsSync(clientPath)) {
@@ -33,7 +33,7 @@ app.post("/convert", (req, res) => {
   //Empties folder to ensure only one image per user
   fsExtra.emptyDirSync(clientPath);
   //Move new image to folder
-  file.mv(`./client/public/temp/${file.name}`, (err) => {
+  file.mv(`../kdp-app-client/public/temp/${file.name}`, (err) => {
     if (err) {
       res.json(err);
     } else {
@@ -50,7 +50,7 @@ app.post("/convert", (req, res) => {
     var apiInstance = new CloudmersiveConvertApiClient.ConvertDataApi();
 
     var inputFile = Buffer.from(
-      fs.readFileSync(`./client/public/temp/${file.name}`).buffer
+      fs.readFileSync(`../kdp-app-client/public/temp/${file.name}`).buffer
     ); // File | Input file to perform the operation on.
 
     var callback = function (error, data, response) {
