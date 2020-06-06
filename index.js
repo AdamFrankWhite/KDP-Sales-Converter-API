@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
 
+const port = process.env.PORT || 5000;
 // app.post("/addfile", (req, res) => {
 //   const file = req.files.file;
 //   fs.writeFile(`./client/public/temp/${file.name}`, file, function (err) {
@@ -68,6 +69,6 @@ app.post("/convert", (req, res) => {
     apiInstance.convertDataXlsxToJson(inputFile, callback);
   }
 });
-app.listen(5000, () => {
+app.listen(port, () => {
   console.log("Server is running on Port 5000");
 });
