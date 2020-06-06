@@ -32,17 +32,14 @@ app.post("/convert", (req, res) => {
     return res.json("Wrong file type");
   }
 
-  console.log(file);
-  const fileDestinationUrl = "../kdp-app-client/public/temp";
-  let clientPath = path.join(__dirname, fileDestinationUrl);
-  // Checks if user image folder exists, if not creates one
-  if (!fs.existsSync(clientPath)) {
-    fs.mkdirSync(clientPath);
-  }
-  //Empties folder to ensure only one image per user
-  fsExtra.emptyDirSync(clientPath);
+  // const fileDestinationUrl = "./temp";
+  // let clientPath = path.join(__dirname, fileDestinationUrl);
+  // // Checks if user image folder exists, if not creates one
+  // if (!fs.existsSync(clientPath)) {
+  //   fs.mkdirSync(clientPath);
+  // }
   //Move new image to folder
-  file.mv(`../kdp-app-client/public/temp/${file.name}`, (err) => {
+  file.mv(`./temp/${file.name}`, (err) => {
     if (err) {
       res.json(err);
     } else {
@@ -58,9 +55,8 @@ app.post("/convert", (req, res) => {
 
     var apiInstance = new CloudmersiveConvertApiClient.ConvertDataApi();
 
-    var inputFile = Buffer.from(
-      fs.readFileSync(`../kdp-app-client/public/temp/${file.name}`).buffer
-    ); // File | Input file to perform the operation on.
+    var inputFile = Buffer.from(fs.readFileSync(`./temp/${file.name}`).buffer); // File | Input file to perform the operation on.
+    console.log(inputFile);
 
     var callback = function (error, data, response) {
       if (error) {
