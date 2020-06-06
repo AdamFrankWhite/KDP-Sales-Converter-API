@@ -9,15 +9,15 @@ app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
 
-app.post("/addfile", (req, res) => {
-  const file = req.files.file;
-  fs.writeFile(`./client/public/temp/${file.name}`, file, function (err) {
-    if (err) {
-      return console.log(err);
-    }
-    res.json("The file was saved!");
-  });
-});
+// app.post("/addfile", (req, res) => {
+//   const file = req.files.file;
+//   fs.writeFile(`./client/public/temp/${file.name}`, file, function (err) {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     res.json("The file was saved!");
+//   });
+// });
 app.post("/convert", (req, res) => {
   if (req.files === null) {
     return res.status(400).json("No file uploaded");
