@@ -22,7 +22,16 @@ app.post("/convert", (req, res) => {
   if (req.files === null) {
     return res.status(400).json("No file uploaded");
   }
+
   const file = req.files.file;
+  // Validate MIMEtype
+  if (
+    file.mimetype !==
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  ) {
+    return res.json("Wrong file type");
+  }
+
   console.log(file);
   const fileDestinationUrl = "../kdp-app-client/public/temp";
   let clientPath = path.join(__dirname, fileDestinationUrl);
