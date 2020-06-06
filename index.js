@@ -62,7 +62,6 @@ app.post("/convert", (req, res) => {
       if (error) {
         console.error(error);
       } else {
-        res.header("Access-Control-Allow-Origin", "*");
         return res.json(data);
       }
     };
